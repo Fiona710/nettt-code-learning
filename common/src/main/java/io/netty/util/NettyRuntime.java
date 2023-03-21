@@ -60,13 +60,17 @@ public final class NettyRuntime {
          *
          * @return the configured number of available processors
          */
+        /**
+         * 获取可使用资源数（默认获取的系统运行时的可用资源量，使用者也可以通过setAvailableProcessors设置可用资源数）
+         * @return
+         */
         @SuppressForbidden(reason = "to obtain default number of available processors")
         synchronized int availableProcessors() {
             if (this.availableProcessors == 0) {
                 final int availableProcessors =
                         SystemPropertyUtil.getInt(
                                 "io.netty.availableProcessors",
-                                Runtime.getRuntime().availableProcessors());
+                                Runtime.getRuntime().availableProcessors());//Runtime.getRuntime().availableProcessors()这个逻辑：获取到了jvm可用处理器数量
                 setAvailableProcessors(availableProcessors);
             }
             return this.availableProcessors;

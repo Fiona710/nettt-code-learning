@@ -73,6 +73,7 @@ public abstract class MultithreadEventExecutorGroup extends AbstractEventExecuto
         checkPositive(nThreads, "nThreads");
 
         if (executor == null) {
+            //创建了一个线程池：这个线程池中会为每个任务创建一个线程
             executor = new ThreadPerTaskExecutor(newDefaultThreadFactory());
         }
 
@@ -81,7 +82,7 @@ public abstract class MultithreadEventExecutorGroup extends AbstractEventExecuto
         for (int i = 0; i < nThreads; i ++) {
             boolean success = false;
             try {
-                children[i] = newChild(executor, args);
+                children[i] = newChild(executor, args);//children中的每个元素都传入了一个共同的参数executor
                 success = true;
             } catch (Exception e) {
                 // TODO: Think about if this is a good exception type
