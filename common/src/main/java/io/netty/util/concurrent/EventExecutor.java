@@ -22,6 +22,11 @@ package io.netty.util.concurrent;
  * way to access methods.
  *
  */
+
+/**
+ * 这个方法提供了查看事件循环中执行的线程的相关方法
+ * 这个类继承了ScheduledExecutorService，所以实质上是一个定时调度线程池
+ */
 public interface EventExecutor extends EventExecutorGroup {
 
     /**

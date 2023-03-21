@@ -77,12 +77,12 @@ public abstract class MultithreadEventExecutorGroup extends AbstractEventExecuto
             executor = new ThreadPerTaskExecutor(newDefaultThreadFactory());
         }
 
-        children = new EventExecutor[nThreads];
+        children = new EventExecutor[nThreads];//初始化children数组大小
 
         for (int i = 0; i < nThreads; i ++) {
             boolean success = false;
             try {
-                children[i] = newChild(executor, args);//children中的每个元素都传入了一个共同的参数executor
+                children[i] = newChild(executor, args);//初始化children数组中的元素，children中每个元素是一个线程池，children中的每个元素都传入了一个共同的参数executor
                 success = true;
             } catch (Exception e) {
                 // TODO: Think about if this is a good exception type
